@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class BouncyBalls : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public float launchForce = 20f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.AddForce(Vector3.up * launchForce, ForceMode.Impulse);
+            }
+        }
     }
 }
